@@ -9,4 +9,4 @@ case `uname` in
 esac
 
 "${MAKE}"
-exec erl -pa $PWD/ebin $PWD/deps/*/ebin -boot start_sasl -s reloader -s base
+exec erl -pa $PWD/ebin $PWD/deps/*/ebin -boot start_sasl -s base
