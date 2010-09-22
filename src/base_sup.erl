@@ -41,16 +41,11 @@ upgrade() ->
 %% @spec init([]) -> SupervisorTree
 %% @doc supervisor callback.
 init([]) ->
-    Ip = case os:getenv("MOCHIWEB_IP") of false -> "0.0.0.0"; Any -> Any end,
-    WebConfig = [
-         {ip, Ip},
-                 {port, 8000},
-                 {docroot, base_deps:local_path(["priv", "www"])}],
-    Web = {base_web,
-           {base_web, start, [WebConfig]},
-           permanent, 5000, worker, dynamic},
+    Child = {base_child,
+             {base_child, start_link, []},
+             permanent, 5000, worker, [base_child]},
 
-    Processes = [Web],
+    Processes = [Child],
     {ok, {{one_for_one, 10, 10}, Processes}}.
 
 
@@ -60,3 +55,6 @@ init([]) ->
 -include_lib("eunit/include/eunit.hrl").
 -ifdef(TEST).
 -endif.
+
+
+

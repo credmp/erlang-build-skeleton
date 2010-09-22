@@ -5,7 +5,7 @@
     base,
     base_app,
     base_sup,
-    base_web,
+    base_child,
     base_deps
   ]},
   {registered, []},
